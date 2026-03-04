@@ -17,7 +17,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:#000;
+background:#fff;
 color:#fff;
 font-family:'Cairo',sans-serif;
 overflow-x:hidden;
@@ -176,15 +176,17 @@ background:linear-gradient(to top,rgba(0,174,239,0.85),rgba(0,0,0,0.3));
 }
 
 .workflow-section{
-background:linear-gradient(to bottom,#000,#06131a);
+background:#fff;
 }
 .timeline{
 display:grid;
+
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:40px;
 }
 .step{
-background:var(--glass);
+background:linear-gradient(to bottom,#06131a,#000);
+
 padding:40px 30px;
 border-radius:20px;
 position:relative;
@@ -259,9 +261,56 @@ margin-bottom:15px;
 
 
 
+/* زر القائمة مخفي في الديسكتوب */
+.menu-toggle{
+display:none;
+background:none;
+border:none;
+font-size:28px;
+color:white;
+cursor:pointer;
+}
+
+/* موبايل */
 @media(max-width:768px){
-.hero h1{font-size:38px;}
-header{padding:15px 20px;}
+
+header{
+flex-direction:row;
+justify-content:space-between;
+align-items:center;
+}
+
+.menu-toggle{
+display:block;
+}
+
+/* إخفاء القائمة */
+nav{
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:#000;
+flex-direction:column;
+text-align:center;
+max-height:0;
+overflow:hidden;
+transition:all 0.4s ease;
+}
+
+nav a{
+display:block;
+margin:15px 0;
+}
+
+/* عند الفتح */
+nav.active{
+max-height:500px;
+padding:20px 0;
+}
+
+
+
 }
 </style>
 </head>
@@ -273,15 +322,18 @@ header{padding:15px 20px;}
 <p>Loading...</p>
 </div>
 
-<header>
-<div style="color:#00AEEF;font-weight:900;">WO</div>
-<nav>
-<a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a>
-<a href="#services" data-ar="خدماتنا" data-en="Services">خدماتنا</a>
-<a href="#workflow" data-ar="طريقة عملنا" data-en="Our Process">طريقة عملنا</a>
-<a href="#contact" data-ar="التواصل" data-en="Contact">التواصل</a>
-</nav>
-<button id="langToggle" class="lang-btn">EN</button>
+<header >
+    <div style="color:#00AEEF;font-weight:900;">WO</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="navbar" >
+    <a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a>
+    <a href="#services" data-ar="خدماتنا" data-en="Services">خدماتنا</a>
+    <a href="#workflow" data-ar="طريقة عملنا" data-en="Our Process">طريقة عملنا</a>
+    <a href="#contact" data-ar="التواصل" data-en="Contact">التواصل</a>
+    <button id="langToggle" class="lang-btn">EN</button>
+    </nav>
+    
+    
 </header>
 
 <section class="hero">
@@ -406,18 +458,19 @@ target="_blank">
 
 
 
-<section id="contact">
+
+
+<footer>
+    <section id="contact">
 <h2 class="section-title" data-ar="ابدأ فعاليتك معنا اليوم" data-en="Start Your Event With Us Today">
 ابدأ فعاليتك معنا اليوم
 </h2>
-<p style="text-align:center;"> www.wamdatofuq.com 🌐</p>
-<p style="text-align:center;"> info@wamdatofuq.com 📧</p>
+<p style="text-align:center; color:#fff;"> www.wamdatofuq.com 🌐</p>
+<p style="text-align:center;color:#fff;"> info@wamdatofuq.com 📧</p>
 
-<p style="text-align:center;"> 0581131827 📞</p>
+<p style="text-align:center; color:#fff; "> 0581131827 📞</p>
 
 </section>
-
-<footer>
 Built under SDOS Standards | Powered by FUOMI
 </footer>
 
@@ -480,7 +533,11 @@ window.addEventListener("scroll", () => {
     }
 });
 </script>
-
+<script>
+function toggleMenu(){
+document.getElementById("navbar").classList.toggle("active");
+}
+</script>
 
 
 </body>
